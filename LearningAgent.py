@@ -32,6 +32,10 @@ class LearningAgent:
         '''
         reinforcement learning algorithm
         '''
+        # Could be Q-learning or SARSA
+        # Could be on-policy or off-policy
+        # Could be model-free or model-based
+        
 
 
     def select_action(self):
