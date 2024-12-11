@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from checkers_env import checkers_env
-from LearningAgent import LearningAgent
+from SARSALearningAgent import LearningAgent
 
 class CheckersGameTest(unittest.TestCase):
     def setUp(self):
@@ -10,8 +10,8 @@ class CheckersGameTest(unittest.TestCase):
     
     def test_board_initialization(self):
         """Test initial board setup"""
-        self.assertEqual(np.sum(self.env.board > 0), 12)
-        self.assertEqual(np.sum(self.env.board < 0), 12)
+        self.assertEqual(np.sum(self.env.board > 0), 6)
+        self.assertEqual(np.sum(self.env.board < 0), 6)
     
     def test_valid_moves(self):
         """Test valid moves generation"""

@@ -7,10 +7,10 @@ if [ ! -f requirements.txt ]; then
 fi
 
 # Create a virtual environment
-python -m venv venv
+/usr/local/bin/python3 -m venv checkers-env
 
 # Activate the virtual environment
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+source checkers-env/bin/activate  # On Windows use `venv\Scripts\activate`
 
 # Upgrade pip
 pip install --upgrade pip
