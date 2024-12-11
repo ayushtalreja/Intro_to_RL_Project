@@ -35,11 +35,6 @@ Modify learning parameters in `LearningAgent`:
 - `epsilon`: Exploration rate
 - `discount_factor`: Future reward consideration
 
-## Future Improvements
-- Advanced AI strategies
-- King piece implementation
-- Enhanced GUI features
-
 ## Contributors
 - Ayush Kumar
 - Moaaz Eid
