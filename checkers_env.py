@@ -97,13 +97,57 @@ class checkers_env:
         
         return 0
 
-
+    
     def step(self, action, player):
         '''
-        The transition of board and incurred reward after player performs an action. Be careful about King
+        The transition of board and incurred reward after player performs an action.
+        
+        :param action: List [start_row, start_col, end_row, end_col] representing the move
+        :param player: Current player (1 or -1)
+        :return: [next_board, reward]
         '''
-
+        start_row, start_col, end_row, end_col = action
+        
+        # Validate the move
+        valid_moves = self.valid_moves(player)
+        if action not in valid_moves:
+            raise ValueError(f"Invalid move {action} for player {player}")
+        
+        # Capture piece if it's a jump move
+        self.capture_piece(action)
+        
+        # Move the piece
+        self.board[end_row][end_col] = self.board[start_row][start_col]
+        self.board[start_row][start_col] = 0
+        
+        # Promote piece to king if it reaches opposite end
+        self.board = self.promote_to_king(self.board, end_row, end_col)
+        
+        # Switch player
+        self.player *= -1
+        
+        # Basic reward calculation (can be expanded)
+        reward = 0
+        
+        # Reward for capturing a piece
+        if abs(start_row - end_row) == 2:
+            reward += 1  # Reward for capturing
+        
+        # Reward for moving forward
+        if player == 1 and end_row > start_row:
+            reward += 0.5
+        elif player == -1 and end_row < start_row:
+            reward += 0.5
+        
+        # Check game winner for additional rewards/penalties
+        winner = self.game_winner(self.board)
+        if winner == player:
+            reward += 10
+        elif winner == -player:
+            reward -= 10
+        
         return [self.board, reward]
+    
 
     
     def render(self):
