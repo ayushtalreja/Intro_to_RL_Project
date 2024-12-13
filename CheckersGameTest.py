@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from checkers_env import checkers_env
-from SARSALearningAgent import LearningAgent
+from LearningAgent import LearningAgent
 
 class CheckersGameTest(unittest.TestCase):
     def setUp(self):

@@ -107,7 +107,7 @@ class CheckersGUI:
         if winner != 0:
             self.game_over = True
             message = f"Player {winner} wins!" if winner != 0 else "Draw"
-            tk.messagebox.showinfo("Game Over", message)
+            tk.Message("Game Over", message)
 
 def main():
     root = tk.Tk()

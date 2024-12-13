@@ -17,7 +17,7 @@ class LearningAgent:
         self.env = env
         
         # Initialize Q-table (board state, action) representation
-        self.q_table = {}
+        self.q_table = {} 
     
     def get_state_key(self, board):
         """
@@ -92,7 +92,7 @@ class LearningAgent:
     
     def sarsa_update(self, state, action, reward, next_state, next_action):
         """
-        SARSA learning update
+        SARSA learning update with robust next action handling
         """
         state_key = self.get_state_key(state)
         next_state_key = self.get_state_key(next_state)
@@ -101,12 +101,17 @@ class LearningAgent:
         if state_key not in self.q_table:
             self.q_table[state_key] = {tuple(action): 0}
         
-        if next_state_key not in self.q_table:
-            self.q_table[next_state_key] = {tuple(next_action): 0}
+        # Handle case where next_action is None
+        if next_action is None:
+            next_q = 0
+        else:
+            if next_state_key not in self.q_table:
+                self.q_table[next_state_key] = {tuple(next_action): 0}
+            
+            next_q = self.q_table[next_state_key].get(tuple(next_action), 0)
         
-        # Get current and next state-action Q-values
+        # Get current state-action Q-values
         current_q = self.q_table[state_key].get(tuple(action), 0)
-        next_q = self.q_table[next_state_key].get(tuple(next_action), 0)
         
         # SARSA update rule
         updated_q = current_q + self.step_size * (

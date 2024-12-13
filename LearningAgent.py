@@ -17,7 +17,7 @@ class LearningAgent:
         self.env = env
         
         # Initialize Q-table (board state, action) representation
-        self.q_table = {}
+        self.q_table = {} 
     
     def get_state_key(self, board):
         """
@@ -92,7 +92,7 @@ class LearningAgent:
     
     def q_learning_update(self, state, action, reward, next_state):
         """
-        Q-learning update rule
+        Q-learning update rule with robust handling of empty state moves
         """
         state_key = self.get_state_key(state)
         next_state_key = self.get_state_key(next_state)
@@ -103,13 +103,19 @@ class LearningAgent:
         
         if next_state_key not in self.q_table:
             next_moves = self.env.valid_moves(self.env.player)
-            self.q_table[next_state_key] = {tuple(move): 0 for move in next_moves}
+            
+            # Handle case with no valid moves
+            if not next_moves:
+                next_max_q = 0  # Default to 0 if no moves available
+            else:
+                self.q_table[next_state_key] = {tuple(move): 0 for move in next_moves}
+                next_max_q = max(self.q_table[next_state_key].values())
+        else:
+            # Use max Q-value if state exists
+            next_max_q = max(self.q_table[next_state_key].values()) if self.q_table[next_state_key] else 0
         
         # Get current state-action Q-value
         current_q = self.q_table[state_key].get(tuple(action), 0)
-        
-        # Find max Q-value for next state
-        next_max_q = max(self.q_table[next_state_key].values())
         
         # Q-learning update rule
         updated_q = current_q + self.step_size * (

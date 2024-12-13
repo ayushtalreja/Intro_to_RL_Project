@@ -18,7 +18,7 @@ def check_dependencies():
 
 def train_model():
     """Train the reinforcement learning model"""
-    from SARSALearningAgent import LearningAgent
+    from LearningAgent import LearningAgent
     from checkers_env import checkers_env
     from PerformanceTracker import PerformanceTracker
     
