@@ -25,8 +25,12 @@ This project implements a Checkers game using Reinforcement Learning techniques,
 
 ## Project Structure
 - `checkers_env.py`: Game environment
-- `LearningAgent.py`: RL agent implementation
+- `LearningAgent.py`: QLearning RL agent implementation
+- `SARSALearningAgent.py`: Sarsa RL agent implementation
 - `gui.py`: Graphical user interface
+- `modelpersistance.py`: Logic for model saving and retrieving
+- `PerformanceTracker.py`: Logic for performance tracking such as episodes rewards
+- `CheckersGameTest.py`: Test for checkers environment
 - `main.py`: Game execution script
 
 ## Customization
