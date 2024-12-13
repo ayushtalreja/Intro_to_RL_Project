@@ -39,6 +39,12 @@
 - QTable Loading
 - Listing all saved QTables
 
+## `PerformanceTracker.py`
+### Main Functions
+- episode Tracking
+- performance data saving
+- performance data loading
+
 ## Key Reinforcement Learning Concepts
 - Epsilon-greedy exploration
 - Q-table based value estimation
