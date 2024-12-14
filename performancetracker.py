@@ -43,7 +43,7 @@ class PerformanceTracker:
         plt.tight_layout()
         plt.show()
     
-    def save_performance_data(self, filename='performance_data.npz'):
+    def save_performance_data(self, filename='performance/performance_data.npz'):
         """
         Save performance metrics
         """
@@ -52,7 +52,7 @@ class PerformanceTracker:
                  wins=self.episode_wins,
                  cumulative_curve=self.cumulative_learning_curve)
     
-    def load_performance_data(self, filename='performance_data.npz'):
+    def load_performance_data(self, filename='performance/performance_data.npz'):
         """
         Load previously saved performance data
         """

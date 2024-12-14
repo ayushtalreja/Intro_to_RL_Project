@@ -4,7 +4,7 @@ import json
 
 class ModelPersistence:
     @staticmethod
-    def save_q_table(agent, filename='checkers_q_table.pkl'):
+    def save_q_table(agent, filename='q_table/checkers_q_table.pkl'):
         """
         Save Q-table to a pickle file
         """
@@ -22,7 +22,7 @@ class ModelPersistence:
             json.dump(metadata, f)
     
     @staticmethod
-    def load_q_table(agent, filename='checkers_q_table.pkl'):
+    def load_q_table(agent, filename='q_table/checkers_q_table.pkl'):
         """
         Load Q-table from a pickle file
         """

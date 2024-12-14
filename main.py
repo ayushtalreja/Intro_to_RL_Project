@@ -20,7 +20,7 @@ def train_model():
     """Train the reinforcement learning model"""
     from LearningAgent import LearningAgent
     from checkers_env import checkers_env
-    import PerformanceTracker
+    from performancetracker import PerformanceTracker
     from modelpersistance import ModelPersistence
 
     env = checkers_env()
