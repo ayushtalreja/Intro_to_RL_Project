@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-class LearningAgent:
+class SARSALearningAgent:
     def __init__(self, step_size=0.1, epsilon=0.1, discount_factor=0.9, env=None):
         """
         Initialize SARSA Learning Agent for Checkers
