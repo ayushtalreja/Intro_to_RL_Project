@@ -21,14 +21,17 @@ def train_model():
     from LearningAgent import LearningAgent
     from checkers_env import checkers_env
     from PerformanceTracker import PerformanceTracker
-    
+    from modelpersistance import ModelPersistence
+
     env = checkers_env()
     agent = LearningAgent(env=env)
     tracker = PerformanceTracker(agent)
+    persistmodel = ModelPersistence()
     
     agent.learning(num_episodes=1)
     tracker.plot_learning_progress()
     tracker.save_performance_data()
+    persistmodel.save_q_table(agent)
 
 def run_game():
     """Run the Checkers game GUI"""
