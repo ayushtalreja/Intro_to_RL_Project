@@ -53,6 +53,10 @@ class CheckersGUI:
                     text = '🔵'
                 elif piece == -1:
                     text = '🔴'
+                elif piece == 2:
+                    text = '🟣'
+                elif piece == -2:
+                    text = '🟠'
                 else:
                     text = ''
                 
