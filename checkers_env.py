@@ -81,43 +81,7 @@ class checkers_env:
                 valid_actions.append([row, col, jump_row, jump_col])
         
         return valid_actions
-
-    def step(self, action, player):
-        '''
-        The transition of board and incurred reward after player performs an action.
-        
-        :param action: List [start_row, start_col, end_row, end_col] representing the move
-        :param player: Current player (1 or -1)
-        :return: [next_board, reward]
-        '''
-        start_row, start_col, end_row, end_col = action
-        
-        # Validate the move
-        valid_moves = self.valid_moves(player)
-        if action not in valid_moves:
-            raise ValueError(f"Invalid move {action} for player {player}")
-        
-        # Store piece type before move
-        piece_type = self.board[start_row][start_col]
-        
-        # Capture piece if it's a jump move
-        self.capture_piece(action)
-        
-        # Move the piece
-        self.board[end_row][end_col] = piece_type
-        self.board[start_row][start_col] = 0
-        
-        # Promote piece to king if it reaches opposite end
-        self.board = self.promote_to_king(self.board, end_row, end_col)
-        
-        # Switch player
-        self.player *= -1
-        
-        # Calculate reward
-        reward = self._calculate_reward(action, player, piece_type)
-        
-        return [self.board, reward]
-
+    
     def _calculate_reward(self, action, player, piece_type):
         """
         Helper method to calculate rewards for moves
@@ -176,6 +140,42 @@ class checkers_env:
             mid_row = (start_row + end_row) // 2
             mid_col = (start_col + end_col) // 2
             self.board[mid_row][mid_col] = 0
+
+    def step(self, action, player):
+        '''
+        The transition of board and incurred reward after player performs an action.
+        
+        :param action: List [start_row, start_col, end_row, end_col] representing the move
+        :param player: Current player (1 or -1)
+        :return: [next_board, reward]
+        '''
+        start_row, start_col, end_row, end_col = action
+        
+        # Validate the move
+        valid_moves = self.valid_moves(player)
+        if action not in valid_moves:
+            raise ValueError(f"Invalid move {action} for player {player}")
+        
+        # Store piece type before move
+        piece_type = self.board[start_row][start_col]
+        
+        # Capture piece if it's a jump move
+        self.capture_piece(action)
+        
+        # Move the piece
+        self.board[end_row][end_col] = piece_type
+        self.board[start_row][start_col] = 0
+        
+        # Promote piece to king if it reaches opposite end
+        self.board = self.promote_to_king(self.board, end_row, end_col)
+        
+        # Switch player
+        self.player *= -1
+        
+        # Calculate reward
+        reward = self._calculate_reward(action, player, piece_type)
+        
+        return [self.board, reward]
         
     def game_winner(self, board):
         """
