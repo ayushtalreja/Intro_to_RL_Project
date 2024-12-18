@@ -23,7 +23,7 @@ def train_model():
     from performancetracker import PerformanceTracker
     from modelpersistance import ModelPersistence
 
-    env = checkers_env()
+    env = checkers_env()2
     agent = LearningAgent(env=env)
     tracker = PerformanceTracker(agent)
     persistmodel = ModelPersistence()

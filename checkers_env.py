@@ -91,7 +91,7 @@ class checkers_env:
         
         # Reward for capturing
         if abs(start_row - end_row) == 2:
-            reward += 1
+            reward += 3
         
         # Reward for moving forward (regular pieces)
         if abs(piece_type) == 1:

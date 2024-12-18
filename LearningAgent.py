@@ -36,6 +36,8 @@ class LearningAgent:
         - Losing: -10
         - Getting captured: -3
         - Moving backward: -0.5
+        - Making a king: +2
+        - Losing a king: -2
         """
         reward = 0
         
