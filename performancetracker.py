@@ -43,23 +43,24 @@ class PerformanceTracker:
         """
         Track performance metrics for each episode
         """
-        self.episode_rewards.append(total_reward)
-        self.episode_wins.append(1 if is_win else 0)
+        print(f"Tracking Episode {episode}: Reward={total_reward}, Win={is_win}")
 
-        # Track episode completion time
-        current_time = time.time()
-        if self.training_start_time is not None:
-            self.episode_times.append(current_time - self.training_start_time)
+        self.episode_rewards.append(total_reward or 0)  # Ensure non-None reward
+        self.episode_wins.append(1 if is_win else 0)
 
         # Compute cumulative average
         if len(self.episode_rewards) > 0:
             cumulative_avg = np.mean(self.episode_rewards)
             self.cumulative_learning_curve.append(cumulative_avg)
+        else:
+            self.cumulative_learning_curve.append(0)
 
         # Update win rate history
         if len(self.episode_wins) > 0:
             win_rate = sum(self.episode_wins) / len(self.episode_wins)
             self.win_rate_history.append(win_rate)
+        else:
+            self.win_rate_history.append(0)
 
     def plot_learning_progress(self):
         """
@@ -159,15 +160,12 @@ class PerformanceTracker:
         """
         Update the outcome counts and histories
         """
-        if result == 1:
+        if result == 1:  # Win
             self.wins += 1
-            self.win_history.append(self.wins)
-        elif result == -1:
+        elif result == -1:  # Loss
             self.losses += 1
-            self.loss_history.append(self.losses)
         elif result == 0.5:  # Draw
             self.draws += 1
-            self.draw_history.append(self.draws)
 
     def plot_results(self):
         """
