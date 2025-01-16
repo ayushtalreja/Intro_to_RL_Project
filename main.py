@@ -23,12 +23,12 @@ def train_model():
     from performancetracker import PerformanceTracker
     from modelpersistance import ModelPersistence
 
-    env = checkers_env()2
+    env = checkers_env()
     agent = LearningAgent(env=env)
     tracker = PerformanceTracker(agent)
     persistmodel = ModelPersistence()
     
-    agent.learning(num_episodes=1)
+    agent.learning(num_episodes=20)
     tracker.plot_learning_progress()
     tracker.save_performance_data()
     persistmodel.save_q_table(agent)

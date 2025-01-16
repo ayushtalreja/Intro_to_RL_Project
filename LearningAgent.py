@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import random
 
@@ -131,6 +133,7 @@ class LearningAgent:
         """
         Q-learning training method
         """
+        start_time = time.time()
         for episode in range(num_episodes):
             # Reset environment
             self.env.reset()
@@ -160,3 +163,9 @@ class LearningAgent:
                 # Check game end
                 if self.env.game_winner(current_board) != 0:
                     break
+
+            # Progress tracking
+            elapsed_time = time.time() - start_time
+            remaining_time = (elapsed_time / (episode + 1)) * (num_episodes - episode - 1)
+            print(f"Episode {episode + 1}/{num_episodes} - Time Elapsed: {elapsed_time:.2f}s - "
+                  f"Estimated Time Remaining: {remaining_time:.2f}s")

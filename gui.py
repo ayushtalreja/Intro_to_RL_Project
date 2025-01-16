@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import messagebox
+
 import numpy as np
 from checkers_env import checkers_env
 from LearningAgent import LearningAgent
@@ -57,10 +59,10 @@ class CheckersGUI:
                     text_color = 'red'
                 elif piece == 2:
                     text = '👑'  # Crown for player 1 king
-                    text_color = 'blue'
+                    text_color = 'gold'
                 elif piece == -2:
-                    text = '👑'  # Crown for player -1 king
-                    text_color = 'red'
+                    text = '🤴🏽'  # Crown for player -1 king
+                    text_color = 'purple'
                 else:
                     text = ''
                     text_color = 'black'
@@ -69,7 +71,7 @@ class CheckersGUI:
                     text=text,
                     fg=text_color,
                     bg=bg_color,
-                    state='normal'
+                    #state='normal'
                 )
 
     def square_clicked(self, row, col):
@@ -132,11 +134,22 @@ class CheckersGUI:
         """
         Check for game termination
         """
-        winner = self.env.game_winner(self.env.board)
+        """winner = self.env.game_winner(self.env.board)
         if winner != 0:
             self.game_over = True
             message = f"Player {winner} wins!" if winner != 0 else "Draw"
-            tk.Message("Game Over", message)
+            tk.Message("Game Over", message)"""
+        winner = self.env.game_winner(self.env.board)
+        if winner != 0 or self.env.is_draw():
+            self.game_over = True
+            if winner != 0:
+                message = f"Game Over - Player {winner} wins!"
+            else:
+                message = "Game Over - Draw!"
+
+            self.status_label.config(text=message)
+            # Show popup message box
+            messagebox.showinfo("Game Over", message)
 
 def main():
     root = tk.Tk()
