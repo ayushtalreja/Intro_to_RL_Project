@@ -20,24 +20,25 @@ def check_dependencies():
 
 def train_model():
     """Train the reinforcement learning model"""
-    from LearningAgent import LearningAgent
+    from SARSA1
+    ent import SARSALearningAgent
     from checkers_env import checkers_env
     from performancetracker import PerformanceTracker
     from modelpersistance import ModelPersistence
 
     env = checkers_env()
-    agent = LearningAgent(env=env)
+    agent = SARSALearningAgent(env=env)
     tracker = PerformanceTracker(agent)
     persistmodel = ModelPersistence()
 
     print("Starting training...")
     tracker.start_training()
-    num_episodes = 20
+    num_episodes = 1000
 
     try:
         for episode in range(num_episodes):
             env.reset()  # Reset the environment
-            total_reward = agent.learning(num_episodes=200)  # Get total reward from learning
+            total_reward = agent.learning(num_episodes=num_episodes)  
 
             # Determine game outcome
             game_winner = env.game_winner(env.board)
