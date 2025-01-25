@@ -1,3 +1,4 @@
+import time
 import numpy as np
 import random
 
@@ -36,6 +37,8 @@ class SARSALearningAgent:
         - Losing: -10
         - Getting captured: -3
         - Moving backward: -0.5
+        - Making a king: +2
+        - Losing a king: -2
         """
         reward = 0
         
@@ -125,6 +128,8 @@ class SARSALearningAgent:
         """
         Training method for the agent
         """
+        print("Starting training...")
+        total_reward = 0  # Initialize total reward
         for episode in range(num_episodes):
             # Reset environment
             self.env.reset()
@@ -140,6 +145,7 @@ class SARSALearningAgent:
                 
                 # Evaluate reward
                 reward = self.evaluation(next_board)
+                total_reward += reward  # Accumulate rewards
                 
                 # Choose next action
                 next_action = self.choose_action(next_board)
@@ -155,3 +161,5 @@ class SARSALearningAgent:
                 # Check game end
                 if self.env.game_winner(current_board) != 0:
                     break
+            print(f"Episode {episode + 1}/{num_episodes} - Total Reward: {total_reward}")
+        return total_reward  # Return total reward
