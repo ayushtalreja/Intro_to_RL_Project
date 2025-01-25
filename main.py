@@ -20,8 +20,7 @@ def check_dependencies():
 
 def train_model():
     """Train the reinforcement learning model"""
-    from SARSA1
-    ent import SARSALearningAgent
+    from SARSALearningAgent import SARSALearningAgent
     from checkers_env import checkers_env
     from performancetracker import PerformanceTracker
     from modelpersistance import ModelPersistence
@@ -33,7 +32,7 @@ def train_model():
 
     print("Starting training...")
     tracker.start_training()
-    num_episodes = 1000
+    num_episodes = 500
 
     try:
         for episode in range(num_episodes):
